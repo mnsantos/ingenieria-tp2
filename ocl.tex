@@ -2,23 +2,96 @@
 
 context Bicicleta
 
-inv: Pedido.allInstances -> forAll(p1 | Pedidos.allInstances.forAll->(p2 | p1 != p2 && p1.hora == p2.hora && p1.bicicletas -> includes(self) && p2.bicicletas -> includes(self))) -> isEmpty()
+inv: Pedido.allInstances -> forAll(p1 | Pedidos.allInstances -> forAll -> (p2 | p1.bicicletas -> includes(self) && p2.bicicletas -> includes(self) implies p1.horaSalida != p2.horaSalida) )
+
 
 
 - Los id's de las bicicletas son distintos
 
 context Bicicleta
 
-inv: Bicicleta.allInstances -> (b | b.id == self.id) -> size()) == 1
+inv: Bicicleta.allInstances -> select -> (b | b.id == self.id) -> size()) == 1
 
 
-- Los PIN's de los usuarios son iguales
+
+- Los DNI's de los usuarios son iguales
 
 context Usuario
 
-inv: Bicicleta.allInstances -> (b | b.id == self.id) -> size()) == 1
+inv: Usuario.allInstances -> select (u | u.DNI == self.DNI) -> size()) == 1
 
 
+
+- Si un usuario está penalizado, no puede alquilar bicis entre la fecha de origen de la penalización y la fecha de vencimiento
+
+context Usuario
+
+inv: (self.penalizacion() -> size()) = 1) implies ((self.alquiler -> size() = 1) implies (self.alquiler.fecha < self.penalizacion().fechaEmision || self.alquiler.fecha > self.penalizacion.fechaVencimiento))
+
+
+
+- No hay estaciones con nombres iguales.
+
+context Estacion
+
+inv: (Estacion.allInstances -> select(e | e.nombre == self.nombre) -> size() ) = 1
+
+
+
+- No hay estaciones con direcciones iguales
+
+context Estacion
+
+inv: (Estacion.allInstances -> select(e | e.direccion == self.direccion) -> size() ) = 1
+	
+
+
+- No hay pedidos con una misma estación como origen y destino
+
+context Pedido
+
+inv: self.estacionOrigen != self.estacionDestino
+
+
+
+- Hay suficientes bicicletas para albergar cantidad a retirar de la estación origen
+
+context Pedido
+
+inv: ( (self.bicicletas -> size()) < self.estacionOrigen.capacidad )
+
+
+
+- Hay suficiente capacidad para albergar la cantidad de bicicletas pedidas en la estación Destino
+
+context Pedido
+
+inv: ( (self.bicicletas -> size()) < self.estacionDestino.capacidad)
+
+
+
+- Solo se pueden transportar bicicletas que no estén alquiladas
+
+context Pedido
+
+inv: ( (self.bicicletas -> forAll(b | (b.alquiler -> size() = 1) implies b.alquiler.Hora != self.HoraSalida  ))
+
+
+
+- No pueden haber empleados de estación iguales en dos estaciones distintas
+
+context Empleado estación
+
+inv: Estacion.allInstances -> select( e | e -> (includes(self)) ) -> size() = 1
+
+
+
+- Las estaciones del centro tienen más capacidad que las de la periferia.(La proporción del doble parece razonable, y es
+una decisión propia)
+
+context Estación Centro
+
+inv: (EstacionPeriferia.allInstances() -> forAll(e | e.capacidad*2 <= self.capacidad))
 
 
 
