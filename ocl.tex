@@ -1,0 +1,29 @@
+- No hay una bicicleta que esté en dos pedidos distintos para una misma hora.
+
+context Bicicleta
+
+inv: Pedido.allInstances -> forAll(p1 | Pedidos.allInstances.forAll->(p2 | p1 != p2 && p1.hora == p2.hora && p1.bicicletas -> includes(self) && p2.bicicletas -> includes(self))) -> isEmpty()
+
+
+- Los id's de las bicicletas son distintos
+
+context Bicicleta
+
+inv: Bicicleta.allInstances -> (b | b.id == self.id) -> size()) == 1
+
+
+- Los PIN's de los usuarios son iguales
+
+context Usuario
+
+inv: Bicicleta.allInstances -> (b | b.id == self.id) -> size()) == 1
+
+
+
+
+
+
+
+
+
+
