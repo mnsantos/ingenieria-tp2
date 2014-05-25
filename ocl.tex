@@ -1,34 +1,21 @@
-- No hay una bicicleta que esté en dos pedidos distintos para una misma hora.
+\oclInv{Bicicleta}{Pedido.allInstances() $\rightarrow$ forAll(p1 | Pedido.allInstances() $\rightarrow$ forAll(p2 | p1.bicicletas $\rightarrow$ includes(self) $\wedge$ p2.bicicletas $\rightarrow$ includes(self) implies p1.horaSalida != p2.horaSalida))}{No hay una bicicleta que esté en dos pedidos distintos para una misma hora}
 
-context Bicicleta
+~
 
-inv: Pedido.allInstances -> forAll(p1 | Pedidos.allInstances -> forAll -> (p2 | p1.bicicletas -> includes(self) && p2.bicicletas -> includes(self) implies p1.horaSalida != p2.horaSalida) )
+\oclInv{Bicicleta}{(Bicicleta.allInstances() $\rightarrow$ select(b | b.id = self.id) $\rightarrow$ size() ) = 1}{Los identificadores de las bicicletas son distintos}
 
+~
 
+\oclInv{Usuario}{(Usuario.allInstances() $\rightarrow$ select(u | u.DNI = self.DNI) $\rightarrow$ size() ) = 1}{Los DNI's de los usuarios son distintos}
 
-- Los id's de las bicicletas son distintos
+~
 
-context Bicicleta
+\oclInv{Usuario}{(self.penalizacion() $\rightarrow$ size() = 1) implies (
+(self.alquiler $\rightarrow$ size() = 1) implies ((self.alquiler.fecha \ < \ self.penalizacion().fechaEmision $\lor$
+self.alquiler.fecha \ > \ self.penalizacion.fechaVencimiento))))}{Si un usuario está penalizado, no puede alquilar bicicletas entre
+la fecha de origen de la penalización y la fecha de vencimiento}
 
-inv: Bicicleta.allInstances -> select -> (b | b.id == self.id) -> size()) == 1
-
-
-
-- Los DNI's de los usuarios son iguales
-
-context Usuario
-
-inv: Usuario.allInstances -> select (u | u.DNI == self.DNI) -> size()) == 1
-
-
-
-- Si un usuario está penalizado, no puede alquilar bicis entre la fecha de origen de la penalización y la fecha de vencimiento
-
-context Usuario
-
-inv: (self.penalizacion() -> size()) = 1) implies ((self.alquiler -> size() = 1) implies (self.alquiler.fecha < self.penalizacion().fechaEmision || self.alquiler.fecha > self.penalizacion.fechaVencimiento))
-
-
+~
 
 - No hay estaciones con nombres iguales.
 
