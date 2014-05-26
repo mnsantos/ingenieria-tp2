@@ -1,4 +1,4 @@
-\oclInv{Bicicleta}{Pedido.allInstances() $\rightarrow$ forAll(p1 | Pedido.allInstances() $\rightarrow$ forAll(p2 | p1.bicicletas $\rightarrow$ includes(self) $\wedge$ p2.bicicletas $\rightarrow$ includes(self) implies p1.horaSalida != p2.horaSalida))}{No hay una bicicleta que esté en dos pedidos distintos para una misma hora}
+\oclInv{Bicicleta}{Pedido.allInstances() $\rightarrow$ forAll(p1 | Pedido.allInstances() $\rightarrow$ forAll(p2 | p1.bicicletas $\rightarrow$ includes(self) $\wedge$ p2.bicicletas $\rightarrow$ includes(self) implies p1.horaSalida $\neq$ p2.horaSalida))}{No hay una bicicleta que esté en dos pedidos distintos para una misma hora}
 
 ~
 
@@ -17,68 +17,43 @@ la fecha de origen de la penalización y la fecha de vencimiento}
 
 ~
 
-- No hay estaciones con nombres iguales.
+\oclInv{Estacion}{(Estacion.allInstances() $\rightarrow$ select (e| e.nombre = self.nombre) $\rightarrow$ size() ) = 1}
+{No hay estaciones con nombres iguales}
 
-context Estacion
+~
 
-inv: (Estacion.allInstances -> select(e | e.nombre == self.nombre) -> size() ) = 1
-
-
-
-- No hay estaciones con direcciones iguales
-
-context Estacion
-
-inv: (Estacion.allInstances -> select(e | e.direccion == self.direccion) -> size() ) = 1
+\oclInv{Estacion}{(Estacion.allInstances $\rightarrow$ select(e | e.direccion = self.direccion) -> size() ) = 1}
+{No hay estaciones con direcciones iguales}
 	
+~
 
+\oclInv{Pedido}{self.estacionOrigen $\neq$ self.estacionDestino}{No hay pedidos con una misma estación como origen y destino}
 
-- No hay pedidos con una misma estación como origen y destino
+~
 
-context Pedido
+\oclInv{Pedido}{(self.bicicletas $\rightarrow$ size()) < self.estacionOrigen.capacidad}{La estación origen tiene suficiente
+capacidad como para albergar la cantidad de bicicletas a retirar requerida}
 
-inv: self.estacionOrigen != self.estacionDestino
+~
 
+\oclInv{Pedido}{(self.bicicletas $\rightarrow$ size()) < self.estacionDestino.capacidad}{La estación destino tiene suficiente
+capacidad para albergar la cantidad de bicicletas pedidas}
 
+~
 
-- Hay suficientes bicicletas para albergar cantidad a retirar de la estación origen
+\oclInv{Pedido}{( (self.bicicletas $\rightarrow$ forAll(b | ((b.alquiler $\rightarrow$ size() = 1) implies
+(b.alquiler.Hora $\neq$ self.HoraSalida))))) }{Solo se pueden transportar bicicletas que no estén alquiladas}
 
-context Pedido
+~
 
-inv: ( (self.bicicletas -> size()) < self.estacionOrigen.capacidad )
+\oclInv{EmpleadoEstacion}{(Estacion.allInstances() $\rightarrow$ select ( e | e $\rightarrow$ (includes(self))) 
+$\rightarrow$ size()) = 1 }{No puede haber empleados de estación iguales que trabajen en estaciones distintas}
 
+~
 
-
-- Hay suficiente capacidad para albergar la cantidad de bicicletas pedidas en la estación Destino
-
-context Pedido
-
-inv: ( (self.bicicletas -> size()) < self.estacionDestino.capacidad)
-
-
-
-- Solo se pueden transportar bicicletas que no estén alquiladas
-
-context Pedido
-
-inv: ( (self.bicicletas -> forAll(b | (b.alquiler -> size() = 1) implies b.alquiler.Hora != self.HoraSalida  ))
-
-
-
-- No pueden haber empleados de estación iguales en dos estaciones distintas
-
-context Empleado estación
-
-inv: Estacion.allInstances -> select( e | e -> (includes(self)) ) -> size() = 1
-
-
-
-- Las estaciones del centro tienen más capacidad que las de la periferia.(La proporción del doble parece razonable, y es
-una decisión propia)
-
-context Estación Centro
-
-inv: (EstacionPeriferia.allInstances() -> forAll(e | e.capacidad*2 <= self.capacidad))
+\oclInv{EstacionCentro}{(EstacionPerifera.allInstances()) $\rightarrow$ forAll(e | e.capacidad*2 $\leq$ self.capacidad)}{
+Las estaciones del centro tienen más capacidad que las de la periferia. (La proporción del doble parece una aproximación
+razonable)}
 
 
 
