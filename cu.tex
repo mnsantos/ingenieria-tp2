@@ -1,0 +1,66 @@
+\cu{Registrando usuario}{Usuario}{}
+
+\begin{center}
+    \centering
+    \begin{tabular}{ | p{11cm} | p{6cm} | }
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\
+		\hline
+		1- El sistema despliega una interfaz gráfica con campos a completar
+		por el usuario: Nombre completo, Número de DNI, Domicilio y un teléfono
+		para contacto en caso de ser necesario &  \\ \hline
+		2 - El usuario ingresa los datos en el sistema & 2.1 - El usuario ya se encuentra ingresado en el sistema
+		o hay una inconsistencia con los datos de otro usuario almacenado en la base de datos. Fin de C.U \\ \hline
+		3 - El sistema registra al usuario en el sistema y almacena los datos en la base de datos & \\ \hline
+		\underline{Postcondición :} Usuario registrado & \\ \hline
+    \end{tabular}
+\end{center}
+
+
+~
+
+\cu{Consultando stock/tiempo}{Usuario}{Usuario registrado}
+\begin{center}
+    \centering
+    \begin{tabular}{ | p{11cm} | p{6cm} | }
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\
+		\hline
+		1- El usuario le informa al sistema que desea realizar una consulta acerca de la disponibilidad
+		de bicicletas en una determinada estación & \\ \hline
+		2- El sistema despliega una lista con las estaciones acerca de las cuales es posible consultar & 
+		2.1- El usuario no encuentra en la lista la estación que está buscando porque la misma no se encuentra en
+		funcionamiento, con lo o bien procede a consultar disponibilidad en una estación cercana (ir al paso 3), o
+		decide finalizar la consulta (Fin de C.U)\\ \hline
+		3- El usuario selecciona la estación sobre la cual desea consultar. & \\ \hline
+		4- El sistema envía información acerca de la disponibilidad en la estación seleccionada al momento de la consulta, utilizando distintos colores para reforzar el contenido del mensaje. En el caso de haber muchas bicicletas disponibles utiliza el color verde. Si hay una cantidad moderada de bicicletas utiliza el color naranja. Finalmente,
+		si la cantidad de bicicletas disponibles está por agotarse utiliza el color rojo. Si por el contrario no hay
+		bicicletas disponibles en la estación el sistema informa este hecho al usuario y envía un tiempo estimado en el cual
+		es probable que el stock vuelva a ser positivo. & \\ \hline
+		\underline{Postcondición :} Consulta realizada & \\ \hline
+    \end{tabular}
+\end{center}	
+
+~
+
+\cu{Agregando sugerencia}{Usuario}{Usuario registrado}
+\begin{center}
+    \centering
+    \begin{tabular}{ | p{11cm} | p{6cm} | }
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\
+		\hline
+		1- El usuario le informa al sistema que desea enviar una sugerencia & \\ \hline
+		2- El sistema despliega cuadro de texto en donde el usuario puede escribir los comentarios,
+		mostrando también las pautas del correcto uso de dicha herramienta (Solicita
+		utilizar el espacio con
+		responsabilidad evitando el uso indebido del lenguaje). & \\ \hline
+		También muestra ejemplos de comentarios que han ayudado a la mejora de las ciclovías.
+		3- El usuario ingresa sus comentarios y los envía al sistema & \\ \hline
+		\underline{Postcondición :} Sugerencia enviada & \\ \hline
+    \end{tabular}
+\end{center}
+
+
+
+
