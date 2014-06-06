@@ -1,0 +1,133 @@
+\subsection{Empleado de gobierno}
+
+~
+
+\cu{Ingresando nueva estación}{Empleado de gobierno}{}
+
+\begin{center}
+    \centering
+    \begin{tabular}{ | p{11cm} | p{6cm} | }
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\ \hline
+    	1- El empleado de gobierno indica al sistema que desea agregar una nueva estación & \\ \hline
+    	2- El sistema despliega una interfaz con campos a completar necesarios para el registro de la 
+    	nueva estación: nombre, dirección y capacidad de la misma. & \\ \hline
+    	3- El empleado completa los datos y los envía al sistema & 3.1- Alguno de los campos es incorrecto:
+    	Ya existe una estación en el sistema con dicho nombre o dirección, o la capacidad es incorrecta:
+    	menor a la mínima - superior a la máxima. Volver al paso 3. \\ \hline
+    	4- El sistema le indica al empleado que la estación fue registrada correctamente
+		\underline{Postcondición :} Estación agregada & \\ \hline
+    \end{tabular}
+\end{center}
+
+~
+
+\cu{Consultando estadísticas}{Empleado de gobierno}{}
+
+\begin{center}
+    \centering
+    \begin{tabular}{ | p{11cm} | p{6cm} | }
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\ \hline
+    	1- El empleado de gobierno indica al sistema que desea consultar una estadística. & \\ \hline
+    	2- El sistema despliega una interfaz con las posibles estadísticas a consultar. & \\ \hline
+    	3- El empleado selecciona la estadística de interés, junto con un rango temporal sobre el cual
+    	desea consultar. (Último día, semana, mes, año o histórico) & \\ \hline
+    	4- El sistema despliega la información solicitada. & \\ \hline
+		\underline{Postcondición :} Estadística consultada & \\ \hline
+    \end{tabular}
+\end{center}
+
+~
+
+\cu{Consultando sugerencias}{Empleado de gobierno}{}
+
+\begin{center}
+    \centering
+    \begin{tabular}{ | p{11cm} | p{6cm} | }
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\ \hline
+    	1- El empleado de gobierno indica al sistema que desea ver sugerencias hechas por los usuarios. & \\ \hline
+    	2- El sistema despliega una interfaz con varias opciones: Por un lado puede elegir consultar. 
+    	las sugerencias de todos los usuarios, o seleccionar uno específico ingresando su DNI. Al mismo
+    	tiempo puede filtrar las consultas por rango temporal (Realizadas el último día, semana, mes, año
+    	o histórico). & \\ \hline
+    	3- El empleado selecciona el modo de consulta. & 3.1- El usuario ingresa un DNI que no pertenece a ningún usuario. Volver al paso 2. \\ \hline
+    	4- El sistema envía las sugerencias solicitadas. & \\ \hline
+	\underline{Postcondición :} Sugerencias consultadas & \\ \hline
+    \end{tabular}
+\end{center}
+
+~
+
+\cu{Actualizando estado de la empresa de transportes}{Empleado de gobierno}{}
+
+\begin{center}
+    \centering
+    \begin{tabular}{ | p{11cm} | p{6cm} | }
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\ \hline
+    	1- El empleado de gobierno indica al sistema que desea ingresar información relevante respecto a la empresa de transportes & \\ \hline
+    	2- El sistema despliega una interfaz con dos posibles opciones para completar: Advertir inactividad de la empresa durante cierto rango de tiempo,
+    	o actualizar la cantidad de camiones disponibles para traslados durante cierto rango de tiempo & \\ \hline
+    	3- El empleado de gobierno selecciona la opción que desea e ingresa los datos. & \\ \hline
+	\underline{Postcondición :} Sugerencias consultadas & \\ \hline
+    \end{tabular}
+\end{center}
+
+Si el empleado de gobierno ingresara Inactividad de la empresa entre 15:00 y 17:00hs estaría indicándole al sistema que la empresa de transportes no realizará ningún
+traslado de bicicletas durante dicho horario.
+Si el empleado ingresara 20 camiones entre las 15:00 y 17:00hs estaría indicándole al sistema que la empresa de transportes destinará 20 de sus camiones para traslados
+de bicicletas durante dicho horario.
+
+~
+
+\cu{Ingresando nuevas bicicletas}{Empleado de gobierno}{}
+
+\begin{center}
+    \centering
+    \begin{tabular}{ | p{11cm} | p{6cm} | }
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\ \hline
+    	1- El empleado de gobierno indica al sistema que desea registrar el ingreso de nuevas bicicletas & \\ \hline
+    	2- El sistema despliega una interfaz en donde permite seleccionar la cantidad de bicicletas y el tipo de las mismas & \\ \hline
+    	3- El empleado de gobierno ingresa los datos & 3.1- El empleado de gobierno desea corregir los datos ingresados. El sistema ofrece una interfaz para reingresarlos. Volver al paso 3 \\ \hline
+    	4- El empleado confirma los datos ingresados. & \\ \hline
+    	5- El sistema informa que los datos han sido correctamente actualizados & \\ \hline
+    	\underline{Postcondición :} Nuevas bicicletas ingresadas & \\ \hline
+    \end{tabular}
+\end{center}
+
+Si el empleado de gobierno ingresara Inactividad de la empresa entre 15:00 y 17:00hs estaría indicándole al sistema que la empresa de transportes no realizará ningún
+traslado de bicicletas durante dicho horario.
+Si el empleado ingresara 20 camiones entre las 15:00 y 17:00hs estaría indicándole al sistema que la empresa de transportes destinará 20 de sus camiones para traslados
+de bicicletas durante dicho horario.
+
+~
+
+\cu{Validando registro}{Empleado de gobierno}{}
+
+\begin{center}
+    \centering
+    \begin{tabular}{ | p{11cm} | p{6cm} | }
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\ \hline
+    	1- El empleado de gobierno indica al sistema que desea obtener el listado de las personas registradas no verificadas & \\ \hline
+    	2- El sistema envía el listado & \\ \hline
+    	3- El empleado selecciona alguna de las entradas para validarla & \\ \hline
+    	4- El sistema despliega la información presentada por el usuario al momento del registro & \\ \hline
+    	5- El empleado indica que la información es válida & 5.1- El empleado encuentra una anomalía en los datos e indica qué información es inválida. El sistema notifica por mail al usuario
+    	informándole los datos de registro inválidos y le solicita que se registre nuevamente \\ \hline
+    	6- El sistema informa al empleado de gobierno que la validación se completó exitosamente & \\ \hline
+    	\underline{Postcondición :} Usuario validado & \\ \hline
+    \end{tabular}
+\end{center}
+
+Luego de que un usuario se registra los datos quedan sujetos a verificación por parte de un empleado de gobierno. El mismo chequea consistencia entre la documentación presentada.
+En caso de encontrar alguna anomalía invalida al registro y el sistema envía una notificación al usuario. En el caso de que la validación sea exitosa, el sistema le envía un mail
+al usuario informándole que la validación ha sido completada con éxito.
+~
+
+
+
+
