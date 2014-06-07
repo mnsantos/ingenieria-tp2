@@ -1,17 +1,32 @@
-\cu{Consultando datos de usuario}{Empleado de estación}{}
-
+\cu{Validando autenticación}{Empleado de estación}{}
 \begin{center}
     \centering
     \begin{tabular}{ | p{11cm} | p{6cm} | }
     	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
     	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\
 		\hline
-		1- El empleado de estación indica al sistema que desea ver los datos de un usuario. &  \\ \hline
-		2- El sistema despliega una interfaz gráfica con un campo DNI a completar correspondiente al usuario a penalizar. &  \\ \hline
+		1- El empleado de estación indica al sistema que desea ver los datos del usuario. &  \\ \hline
+		2- El sistema despliega una interfaz gráfica con un campo DNI a completar correspondiente al usuario. &  \\ \hline
 		3- El empleado de estación ingresa el DNI del usuario. &  
 		3.1- El sistema indica que el usuario no existe y permite volver al paso anterior para ingresar el DNI. Volver al paso 3. \\ \hline
-		4- El sistema muestra los datos del usuario correspondientes al DNI ingresado: Nombre, e-mail, teléfono y dirección. También muestra el estado del alquiler actual o un formulario para ingresar un nuevo alquiler(en caso de que no haya ningún alquiler activo) y un formulario para ingresar penalizaciones. &
-		4.1- Si el usuario no es correcto, el sistema permite reingresar el DNI. Volver al paso 3. \\ \hline		
+		4- El sistema indica que el usuario es válido. & \\ \hline
+		\underline{Postcondición :} Autenticación de usuario validada & \\ \hline
+    \end{tabular}
+\end{center}
+
+~
+
+\cu{Consultando datos de usuario}{Empleado de estación}{Autenticación de usuario validada}
+\begin{center}
+    \centering
+    \begin{tabular}{ | p{11cm} | p{6cm} | }
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\
+		\hline
+		1- El empleado de estación indica al sistema que desea ver los datos del usuario. &  \\ \hline
+		2- El sistema despliega una interfaz gráfica con un campo DNI a completar correspondiente al usuario. &  \\ \hline
+		3- El empleado de estación ingresa el DNI del usuario. &  
+		4- El sistema muestra los datos del usuario correspondientes al DNI ingresado: Nombre, e-mail, teléfono y dirección. También muestra el estado del alquiler actual o un formulario para ingresar un nuevo alquiler(en caso de que no haya ningún alquiler activo), si está penalizado actualmente y un formulario para ingresar penalizaciones. & \\ \hline		
 		\underline{Postcondición :} Datos de usuario consultados & \\ \hline
     \end{tabular}
 \end{center}
@@ -25,8 +40,9 @@
     	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
     	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\
 		\hline
-		1- El empleado de estación indica al sistema que desea consultar los datos de un usuario. Usa Consultando datos de usuario. &  \\ \hline
+		1- El empleado de estación consulta los datos del usuario. Usa Consultando datos de usuario. &  \\ \hline
 		2- El empleado de estación completa el formulario de alquiler, ingresando el ID de la bicicleta. Luego envía el formulario al sistema. & \\ \hline
+		3- El sistema indica que el alquiler fue registrado correctamente. & \\ \hline
 		\underline{Postcondición :} Retiro de bicicleta registrado & \\ \hline
     \end{tabular}
 \end{center}
@@ -34,19 +50,20 @@
 ~
 
 \cu{Ingresando penalización}{Empleado de estación}{}
-
 \begin{center}
     \centering
     \begin{tabular}{ | p{11cm} | p{6cm} | }
     	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
     	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\
 		\hline
-		1- El empleado de estación indica al sistema que desea consultar los datos de un usuario. Usa consultando datos de usuario. &  \\ \hline
+		1- El empleado de estación consulta los datos del usuario. Usa Consultando datos de usuario. &  \\ \hline
 		2. El empleado de estación completa el formulario de penalizaciones, ingresando el tipo de penalización y algún comentario pertinente a la penalización. Luego envía el formulario al sistema. & \\ \hline
+		3- El sistema indica que la penalización fue ingresada correctamente. & \\ \hline
 		\underline{Postcondición :} Usuario penalizado & \\ \hline
     \end{tabular}
 \end{center}
 
+El tiempo que el usuario dure penalizado es calculado por el sistema a partir del tipo de penalización indicado.
 
 ~
 
@@ -58,11 +75,14 @@
     	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\
 		\hline
 		1- El empleado de estación indica al sistema que desea modificar el stock de estación. & \\ \hline
-		2- El sistema despliega un formulario para ingresar por separado los listados de IDs de las bicicletas que se van a agregar y remover de la estación. & \\ \hline
+		2- El sistema despliega un formulario para ingresar por separado los listados de IDs de las bicicletas que se van a agregar o remover de la estación. & \\ \hline
 		3- El empleado de estación ingresa en el formulario los IDs de las bicicletas que se agregan o remueven de la estación en los campos correspondientes y envía el formulario al sistema. & \\ \hline
+		4- El sistema indica el stock fue modificado correctamente. & \\ \hline
 		\underline{Postcondición :} Stock de estación modificado & \\ \hline
     \end{tabular}
 \end{center}	
+
+El empleado de estación modifica el stock cuando la empresa de transportes ingresa o retira bicicletas de su estación.
 
 ~
 
@@ -76,8 +96,25 @@
 		1- El empleado de estación indica al sistema que desea modificar el estado de una bicicleta. & \\ \hline
 		2- El sistema muestra un formulario con los campos ID y estado, donde ID es el de la bicicleta y estado es un campo de texto para ingresar el detalle del estado de la bicicleta. & \\ \hline
 		3- El empleado de estación completa el formulario y lo envía. & \\ \hline
-		4- El sistema luego calcula y muestra en que fecha y horario se repondrá la bicicleta. & \\ \hline
+		4- El sistema indica que se ingresó correctamente el cambio de estado de la bicicleta. & \\ \hline
 		\underline{Postcondición :} Bicicleta en mal estado ingresada & \\ \hline
+    \end{tabular}
+\end{center}
+
+~
+
+\cu{Registrando devolución de bicicleta}{Empleado de estación}{}
+\begin{center}
+    \centering
+    \begin{tabular}{ | p{11cm} | p{6cm} | }
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\
+		\hline
+		1- El empleado de estación consulta los datos del usuario. Usa Consultando datos de usuario. &  \\ \hline
+		2- El empleado de estación actualiza el estado del alquiler del usuario para reflejar que la bicicleta fue devuelta exitosamente.
+		3- Si la bicicleta está en mal estado, el empleado de estación penaliza al usuario(extiende Ingresando Penalización) e ingresa la bicicleta en mal estado al sistema(extiende Ingresando bicicleta en mal estado).		
+		4- Si el tiempo de alquiler fue excedido, el empleado de estación penaliza al usuario por demora(extiende Ingresando Penalización).
+		\underline{Postcondición :} Devolución de bicicleta registrada & \\ \hline
     \end{tabular}
 \end{center}
 
