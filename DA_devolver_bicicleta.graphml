@@ -214,7 +214,7 @@ por demora<y:LabelModel>
               <y:Geometry height="40.0" width="198.0" x="518.6944534318607" y="578.3291147416398"/>
               <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="46.3984375" modelName="custom" textColor="#000000" visible="true" width="130.908203125" x="33.5458984375" y="-3.19921875">Ingresa en el sistema 
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="46.3984375" modelName="custom" textColor="#000000" visible="true" width="135.818359375" x="31.0908203125" y="-3.19921875">Ingresar en el sistema 
 bicicleta
 devuelta<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
@@ -593,7 +593,6 @@ por mal estado<y:LabelModel>
       </data>
     </edge>
     <edge id="e11" source="n1" target="n4">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -604,7 +603,6 @@ por mal estado<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e5" source="n0::n1" target="n0::n3">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -615,7 +613,6 @@ por mal estado<y:LabelModel>
       </data>
     </edge>
     <edge id="e12" source="n6" target="n0::n8">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
