@@ -104,7 +104,7 @@
               <y:Geometry height="40.0" width="252.0" x="365.8336025200467" y="207.07946735393597"/>
               <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" modelName="custom" textColor="#000000" visible="true" width="123.408203125" x="64.2958984375" y="10.93359375">Analizar estadísticas<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" modelName="custom" textColor="#000000" visible="true" width="170.599609375" x="40.7001953125" y="10.93359375">Analizar estadísticas (CU 13)<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -168,7 +168,7 @@
               <y:Geometry height="40.0" width="252.0" x="698.8184077892341" y="207.07946735393597"/>
               <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" modelName="custom" textColor="#000000" visible="true" width="124.638671875" x="63.6806640625" y="10.93359375">Analizar sugerencias<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" modelName="custom" textColor="#000000" visible="true" width="171.830078125" x="40.0849609375" y="10.93359375">Analizar sugerencias (CU 14)<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -179,7 +179,6 @@
           </data>
         </node>
         <node id="n0::n7">
-          <data key="d5"/>
           <data key="d6">
             <y:ShapeNode>
               <y:Geometry height="17.573883161512015" width="500.439146620848" x="414.12641466208515" y="147.07946735393597"/>
@@ -197,13 +196,12 @@
           </data>
         </node>
         <node id="n0::n8">
-          <data key="d5"/>
           <data key="d6">
             <y:ShapeNode>
               <y:Geometry height="17.573883161512015" width="500.439146620848" x="414.12641466208527" y="382.33190148908614"/>
               <y:Fill color="#000000" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" modelName="custom" textColor="#000000" visible="true" width="19.17578125" x="240.63168268542404" y="-0.2794646692439926">20<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" modelName="custom" textColor="#000000" visible="true" width="19.17578125" x="240.63168268542404" y="-0.279464669244021">20<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -269,7 +267,7 @@
               <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="32.265625" modelName="custom" textColor="#000000" visible="true" width="153.935546875" x="22.0322265625" y="3.8671875">Ingresar nuevas bicicletas
-al sistema<y:LabelModel>
+al sistema (CU 16)<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -286,7 +284,7 @@ al sistema<y:LabelModel>
               <y:Fill color="#E8EEF7" color2="#B7C9E3" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="32.265625" modelName="custom" textColor="#000000" visible="true" width="142.0" x="28.0" y="3.8671875">Ingresar nueva estación
-en sistema<y:LabelModel>
+en sistema (CU 12)<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -346,13 +344,12 @@ estación<y:LabelModel>
           </data>
         </node>
         <node id="n0::n17">
-          <data key="d5"/>
           <data key="d6">
             <y:ShapeNode>
               <y:Geometry height="17.573883161512015" width="500.439146620848" x="414.12641466208527" y="429.90578465059815"/>
               <y:Fill color="#000000" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" modelName="custom" textColor="#000000" visible="true" width="19.17578125" x="240.63168268542404" y="-0.279464669244021">20<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.1328125" modelName="custom" textColor="#000000" visible="true" width="19.17578125" x="240.63168268542404" y="-0.2794646692439642">20<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -364,7 +361,6 @@ estación<y:LabelModel>
           </data>
         </node>
         <node id="n0::n18">
-          <data key="d5"/>
           <data key="d6">
             <y:ShapeNode>
               <y:Geometry height="17.573883161512015" width="500.439146620848" x="414.1264146620854" y="792.7891430412333"/>
@@ -402,7 +398,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e1" source="n0::n2" target="n0::n5">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -413,7 +408,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e2" source="n0::n4" target="n0::n7">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -424,7 +418,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e3" source="n0::n7" target="n0::n2">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -435,7 +428,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e4" source="n0::n7" target="n0::n6">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -446,7 +438,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e5" source="n0::n5" target="n0::n8">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -457,7 +448,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e6" source="n0::n6" target="n0::n9">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -468,7 +458,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e7" source="n0::n9" target="n0::n8">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -479,7 +468,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e8" source="n0::n11" target="n0::n12">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -490,7 +478,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e9" source="n0::n1" target="n0::n13">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -501,7 +488,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e10" source="n0::n14" target="n0::n15">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -520,7 +506,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e11" source="n0::n15" target="n0::n16">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -531,7 +516,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e12" source="n0::n8" target="n0::n17">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -542,7 +526,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e13" source="n0::n17" target="n0::n0">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -553,7 +536,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e14" source="n0::n17" target="n0::n10">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -564,7 +546,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e15" source="n0::n17" target="n0::n14">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -575,7 +556,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e16" source="n0::n10" target="n0::n11">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -594,7 +574,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e17" source="n0::n12" target="n0::n18">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
@@ -605,7 +584,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e18" source="n0::n13" target="n0::n18">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="-222.26752290950765" ty="0.0"/>
@@ -616,7 +594,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e19" source="n0::n16" target="n0::n18">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="224.2960509736539" ty="0.0"/>
@@ -627,7 +604,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e20" source="n0::n10" target="n0::n18">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="106.50681844215319" ty="0.0">
@@ -648,7 +624,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e21" source="n0::n0" target="n0::n18">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="-120.01093642611704" ty="0.0">
@@ -669,7 +644,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e22" source="n0::n14" target="n0::n18">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="140.1608848797249" ty="0.0">
@@ -690,7 +664,6 @@ estación<y:LabelModel>
       </data>
     </edge>
     <edge id="n0::e23" source="n0::n18" target="n0::n3">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
