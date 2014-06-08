@@ -3,7 +3,6 @@
 ~
 
 \cu{Registrando usuario}{Usuario}{}
-
 \begin{center}
     \centering
     \begin{tabular}{ | p{11cm} | p{6cm} | }
@@ -21,6 +20,25 @@
 \end{center}
 
 Una vez que el registro es realizado, los datos quedan sujetos a verificación por parte de un empleado de gobierno.
+
+~
+
+\cu{Logueándose}{Usuario}{}
+\begin{center}
+    \centering
+    \begin{tabular}{ | p{11cm} | p{6cm} | }
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\
+		\hline
+		1- El sistema despliega una interfaz gráfica con campos a completar
+		por el usuario: Nombre completo, Número de DNI, Domicilio, Mail y un teléfono
+		para contacto en caso de ser necesario &  \\ \hline
+		2 - El usuario ingresa los datos en el sistema & 2.1 - El usuario ya se encuentra ingresado en el sistema
+		o hay una inconsistencia con los datos de otro usuario almacenado en la base de datos. Fin de C.U \\ \hline
+		3 - El sistema registra al usuario en el sistema y almacena los datos en la base de datos & \\ \hline
+		\underline{Postcondición :} Usuario registrado & \\ \hline
+    \end{tabular}
+\end{center}
 
 ~
 
@@ -48,7 +66,26 @@ Una vez que el registro es realizado, los datos quedan sujetos a verificación p
 
 ~
 
-\cu{Agregando sugerencia}{Usuario}{Usuario registrado}
+\cu{Consultando propio estado}{Usuario}{Usuario logueado}
+\begin{center}
+    \centering
+    \begin{tabular}{ | p{11cm} | p{6cm} | }
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
+    	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\
+		\hline
+		1- El usuario le informa al sistema que desea consultar su estado & \\ \hline
+		2- El sistema le despliega una interfaz con varias opciones a consultar:
+		Si el usuario está penalizado actualmente, el historial de 
+		penalizaciones y el historial de alquileres. & \\ \hline
+		3- El usuario indica la opción que desea consultar & \\ \hline
+		4- El sistema le envía al usuario la información solicitada.
+		\underline{Postcondición :} Consulta individual realizada & \\ \hline
+    \end{tabular}
+\end{center}
+
+~
+
+\cu{Agregando sugerencia}{Usuario}{Usuario logueado}
 \begin{center}
     \centering
     \begin{tabular}{ | p{11cm} | p{6cm} | }
@@ -62,6 +99,7 @@ Una vez que el registro es realizado, los datos quedan sujetos a verificación p
 		responsabilidad evitando el uso indebido del lenguaje). & \\ \hline
 		También muestra ejemplos de comentarios que han ayudado a la mejora de las ciclovías.
 		3- El usuario ingresa sus comentarios y los envía al sistema & \\ \hline
+		4- El sistema le indica al usuario que las sugerencias han sido almacenadas & \\ \hline
 		\underline{Postcondición :} Sugerencia enviada & \\ \hline
     \end{tabular}
 \end{center}
