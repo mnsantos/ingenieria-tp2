@@ -1,4 +1,4 @@
-\oclInv{Bicicleta}{Pedido.allInstances() $\rightarrow$ forAll(p1 | Pedido.allInstances() $\rightarrow$ forAll(p2 | p1.bicicletas $\rightarrow$ includes(self) $\wedge$ p2.bicicletas $\rightarrow$ includes(self) implies p1.horaSalida $\neq$ p2.horaSalida))}{No hay una bicicleta que esté en dos pedidos distintos para una misma hora}
+\oclInv{Bicicleta}{Pedido.allInstances() $\rightarrow$ forAll(p1 | Pedido.allInstances() $\rightarrow$ forAll(p2 | p1.bicicletas $\rightarrow$ includes(self) $\wedge$ p2.bicicletas $\rightarrow$ includes(self) $\wedge$ p1$\neq$ p2 implies p1.horaSalida $\neq$ p2.horaSalida))}{No hay una bicicleta que esté en dos pedidos distintos para una misma hora}
 
 ~
 
@@ -10,10 +10,12 @@
 
 ~
 
-\oclInv{Usuario}{(self.penalizacion() $\rightarrow$ size() = 1) implies (
-(self.alquiler $\rightarrow$ size() = 1) implies ((self.alquiler.fecha \ < \ self.penalizacion().fechaEmision $\lor$
-self.alquiler.fecha \ > \ self.penalizacion.fechaVencimiento))))}{Si un usuario está penalizado, no puede alquilar bicicletas entre
-la fecha de origen de la penalización y la fecha de vencimiento}
+
+%CAMBIAR!!
+%\oclInv{Usuario}{(self.penalizacion() $\rightarrow$ size() = 1) implies (
+%(self.alquiler $\rightarrow$ size() = 1) implies ((self.alquiler.fecha \ < \ self.penalizacion().fechaEmision $\lor$
+%self.alquiler.fecha \ > \ self.penalizacion.fechaVencimiento))))}{Si un usuario está penalizado, no puede alquilar bicicletas entre
+%la fecha de origen de la penalización y la fecha de vencimiento}
 
 ~
 
@@ -31,8 +33,7 @@ la fecha de origen de la penalización y la fecha de vencimiento}
 
 ~
 
-\oclInv{Pedido}{(self.bicicletas $\rightarrow$ size()) < self.estacionOrigen.capacidad}{La estación origen tiene suficiente
-capacidad como para albergar la cantidad de bicicletas a retirar requerida}
+\oclInv{Pedido}{(self.bicicletas $\rightarrow$ size()) < self.estacionOrigen.capacidad}{La estación origen tiene suficiente capacidad como para albergar la cantidad de bicicletas a retirar requerida}
 
 ~
 
@@ -46,7 +47,7 @@ capacidad para albergar la cantidad de bicicletas pedidas}
 
 ~
 
-\oclInv{EmpleadoEstacion}{(Estacion.allInstances() $\rightarrow$ select ( e | e $\rightarrow$ (includes(self))) 
+\oclInv{EmpleadoEstacion}{(Estacion.allInstances() $\rightarrow$ select ( e | e.id = self.id )) 
 $\rightarrow$ size()) = 1 }{No puede haber empleados de estación iguales que trabajen en estaciones distintas}
 
 ~
@@ -55,16 +56,42 @@ $\rightarrow$ size()) = 1 }{No puede haber empleados de estación iguales que tr
 Las estaciones del centro tienen más capacidad que las de la periferia. (La proporción del doble parece una aproximación
 razonable)}
 
+~
 
-Otras para agregar:
--No se pueden incorporar bicicletas ya existentes.
--No se puede superar la capacidad de la estacion al incorporar nuevas bicicletas.
--El pedido tiene que tener como responsable a un empleado que trabaje en la estacion destino.
--El alquiler tiene que ser emitido por un empleado que trabaje en la estación en donde fue hecho.
--Las bicicletas que se incorporan no deben estar en ninguna estación.
+\oclInv{Alquiler}{((self.emitidoEn.empleados $\rightarrow$ select(e | e.id = self.emitidoPor.id)) $\rightarrow$ size()) = 1}{Los alquileres tienen que ser emitidos por algún empleado que trabaje en la estación en donde fue hecho}
 
--No se solapan alquileres y penalizaciones.
--Hay una penalizacion si y solo si hay un alquiler indebido.
+~
+
+\oclInv{Pedido}{((self.EstacionDestino.empleados $\rightarrow$ select(e | e.id = self.responsabilidadDe.id)) $\rightarrow$ size()) = \ 1}{Los pedidos tienen que tener como responsable a un empleado que trabaje en la estacion destino}
+~
+
+\oclInv{Incorporación\_bicicletas}{(self.bicicletas $\rightarrow$ size()) < \ self.estacionDestino.capacidad}{La estación destino debe tener suficiente capacidad como para albergar la cantidad de bicicletas a incorporar}
+
+~
+
+\oclInv{Bicicleta}{Bicicleta.AllInstances() $\rightarrow$ forAll(b | (b.alquiler $\rightarrow$ size() = 1) implies (b.EstaEn $\rightarrow$ size() = 0)) }{Si una bicicleta está alquilada entonces no se encuentra en ninguna estación}
+
+~
+
+%%CHEQUEAR
+
+\oclInv{Usuario}{self.penalizaciones $\rightarrow$ forAll(p | self.alquileres $\rightarrow$ forAll(a | a.fecha < \ p.fechaEmision $\lor$ a.fecha > \ p.fechaVencimiento))}{Ningún usuario puede tener un alquiler cuya fecha coincida con el plazo de alguna penalización}
+
+%%
+~
+
+\oclInv{Estacion}{self.capacidad $\geq$ self.bicicletas $\rightarrow$ size()}{La capacidad de una estación nunca es superada por la cantidad de bicicletas presentes}
+
+%Otras para agregar:
+%\begin{itemize}
+%\item No puede haber una bicicleta alquilada que este en una estacion (listo)
+%\item No se puede superar la capacidad de la estacion al incorporar nuevas bicicletas. (listo)
+%\item El pedido tiene que tener como responsable a un empleado que trabaje en la estacion destino. (listo)
+%\item El alquiler tiene que ser emitido por un empleado que trabaje en la estación en donde fue hecho. (listo)
+%\item No se solapan alquileres y penalizaciones. (listo)
+%\item Hay una penalizacion si y solo si hay un alquiler indebido.
+%\item La capacidad nunca es superada por la cantidad de bicicletas presentes (listo)
+%\end{itemize}
 
 
 
