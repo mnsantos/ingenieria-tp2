@@ -2,7 +2,8 @@
 
 ~
 
-\cu{Registrando usuario}{Usuario}{}
+\cu{Iniciando trámite de registración}{Usuario}{}
+
 \begin{center}
     \centering
     \begin{tabular}{ | p{11cm} | p{6cm} | }
@@ -14,8 +15,8 @@
 		para contacto en caso de ser necesario &  \\ \hline
 		2 - El usuario ingresa los datos en el sistema & 2.1 - El usuario ya se encuentra ingresado en el sistema
 		o hay una inconsistencia con los datos de otro usuario almacenado en la base de datos. Fin de C.U \\ \hline
-		3 - El sistema registra al usuario en el sistema y almacena los datos en la base de datos & \\ \hline
-		\underline{Postcondición :} Usuario registrado & \\ \hline
+		3 - El sistema registra al usuario en el sistema, almacena los datos en la base de datos y le anuncia al usuario que la registración se completará cuando los datos se validen y que se le comunicará de dicha operación via email.& \\ \hline
+		\underline{Postcondición :} Trámite de registración iniciado & \\ \hline
     \end{tabular}
 \end{center}
 
@@ -42,7 +43,7 @@ Una vez que el registro es realizado, los datos quedan sujetos a verificación p
 
 ~
 
-\cu{Consultando stock/tiempo}{Usuario}{Usuario registrado}
+\cu{Consultando stock/tiempo}{Usuario}{Trámite de registración iniciado}
 \begin{center}
     \centering
     \begin{tabular}{ | p{11cm} | p{6cm} | }
@@ -51,9 +52,9 @@ Una vez que el registro es realizado, los datos quedan sujetos a verificación p
 		\hline
 		1- El usuario le informa al sistema que desea realizar una consulta acerca de la disponibilidad
 		de bicicletas en una determinada estación & \\ \hline
-		2- El sistema despliega una lista con las estaciones acerca de las cuales es posible consultar & 
+		2- El sistema despliega una lista con las estaciones que es posible consultar & 
 		2.1- El usuario no encuentra en la lista la estación que está buscando porque la misma no se encuentra en
-		funcionamiento, con lo o bien procede a consultar disponibilidad en una estación cercana (ir al paso 3), o
+		funcionamiento, con lo cual o bien procede a consultar disponibilidad en una estación cercana (ir al paso 3), o
 		decide finalizar la consulta (Fin de C.U)\\ \hline
 		3- El usuario selecciona la estación sobre la cual desea consultar. & \\ \hline
 		4- El sistema envía información acerca de la disponibilidad en la estación seleccionada al momento de la consulta, utilizando distintos colores para reforzar el contenido del mensaje. En el caso de haber muchas bicicletas disponibles utiliza el color verde. Si hay una cantidad moderada de bicicletas utiliza el color naranja. Finalmente,
@@ -93,11 +94,11 @@ Una vez que el registro es realizado, los datos quedan sujetos a verificación p
     	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\
 		\hline
 		1- El usuario le informa al sistema que desea enviar una sugerencia & \\ \hline
-		2- El sistema despliega cuadro de texto en donde el usuario puede escribir los comentarios,
+		2- El sistema despliega un cuadro de texto en donde el usuario puede escribir los comentarios,
 		mostrando también las pautas del correcto uso de dicha herramienta (Solicita
 		utilizar el espacio con
-		responsabilidad evitando el uso indebido del lenguaje). & \\ \hline
-		También muestra ejemplos de comentarios que han ayudado a la mejora de las ciclovías.
+		responsabilidad evitando el uso indebido del lenguaje).
+		También muestra ejemplos de comentarios que han ayudado a la mejora de las ciclovías. & \\ \hline
 		3- El usuario ingresa sus comentarios y los envía al sistema & \\ \hline
 		4- El sistema le indica al usuario que las sugerencias han sido almacenadas & \\ \hline
 		\underline{Postcondición :} Sugerencia enviada & \\ \hline

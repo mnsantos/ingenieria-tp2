@@ -71,7 +71,7 @@
     	2- El sistema despliega una interfaz con dos posibles opciones para completar: Advertir inactividad de la empresa durante cierto rango de tiempo,
     	o actualizar la cantidad de camiones disponibles para traslados durante cierto rango de tiempo & \\ \hline
     	3- El empleado de gobierno selecciona la opción que desea e ingresa los datos. & \\ \hline
-	\underline{Postcondición :} Sugerencias consultadas & \\ \hline
+	\underline{Postcondición :} Actualización completada & \\ \hline
     \end{tabular}
 \end{center}
 
@@ -90,18 +90,13 @@ de bicicletas durante dicho horario.
     	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
     	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\ \hline
     	1- El empleado de gobierno indica al sistema que desea registrar el ingreso de nuevas bicicletas & \\ \hline
-    	2- El sistema despliega una interfaz en donde permite seleccionar la cantidad de bicicletas y el tipo de las mismas & \\ \hline
-    	3- El empleado de gobierno ingresa los datos & 3.1- El empleado de gobierno desea corregir los datos ingresados. El sistema ofrece una interfaz para reingresarlos. Volver al paso 3 \\ \hline
-    	4- El empleado confirma los datos ingresados. & \\ \hline
-    	5- El sistema informa que los datos han sido correctamente actualizados & \\ \hline
+    	2- El sistema despliega una interfaz en donde permite seleccionar la cantidad de bicicletas, el tipo de las mismas y el rango Id correspondiente.& \\ \hline
+    	3- El empleado de gobierno ingresa los datos & 3.1-  Alguno de los campos es incorrecto. Por ejemplo:
+        ya existe una bicicleta en el sistema con el mismo ID. Volver al paso 3. \\ \hline
+    	4- El sistema informa que los datos han sido correctamente actualizados & \\ \hline
     	\underline{Postcondición :} Nuevas bicicletas ingresadas & \\ \hline
     \end{tabular}
 \end{center}
-
-Si el empleado de gobierno ingresara Inactividad de la empresa entre 15:00 y 17:00hs estaría indicándole al sistema que la empresa de transportes no realizará ningún
-traslado de bicicletas durante dicho horario.
-Si el empleado ingresara 20 camiones entre las 15:00 y 17:00hs estaría indicándole al sistema que la empresa de transportes destinará 20 de sus camiones para traslados
-de bicicletas durante dicho horario.
 
 ~
 
@@ -119,7 +114,7 @@ de bicicletas durante dicho horario.
     	5- El empleado indica que la información es válida & 5.1- El empleado encuentra una anomalía en los datos e indica qué información es inválida. El sistema notifica por mail al usuario
     	informándole los datos de registro inválidos y le solicita que se registre nuevamente \\ \hline
     	6- El sistema informa al empleado de gobierno que la validación se completó exitosamente & \\ \hline
-    	\underline{Postcondición :} Usuario validado & \\ \hline
+    	\underline{Postcondición :} Registación de usuario completa & \\ \hline
     \end{tabular}
 \end{center}
 
