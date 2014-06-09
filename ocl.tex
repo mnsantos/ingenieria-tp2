@@ -1,3 +1,11 @@
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.19]{imgs/diagrama_clases.png}
+	\caption{Diagrama de Clases}
+\end{figure}
+
+\subsection{Invariantes en OCL}
+
 \oclInv{Bicicleta}{Pedido.allInstances() $\rightarrow$ forAll(p1 | Pedido.allInstances() $\rightarrow$ forAll(p2 | p1.bicicletas $\rightarrow$ includes(self) $\wedge$ p2.bicicletas $\rightarrow$ includes(self) $\wedge$ p1$\neq$ p2 implies p1.horaSalida $\neq$ p2.horaSalida))}{No hay una bicicleta que esté en dos pedidos distintos para una misma hora}
 
 ~
