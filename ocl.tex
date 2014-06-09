@@ -66,7 +66,7 @@ razonable)}
 ~
 
 
-\oclInv{Pedido}{((self.EstacionOrigen.empleados $\rightarrow$ select(e | e.id = self.responsabilidadOrigen.id)) $\rightarrow$ size()) = \ 1}{Los pedidos tienen que tener como responsable origen a un empleado que trabaje en la estacion origen}
+\oclInv{Pedido}{((self.EstacionOrigengit.empleados $\rightarrow$ select(e | e.id = self.responsabilidadOrigen.id)) $\rightarrow$ size()) = \ 1}{Los pedidos tienen que tener como responsable origen a un empleado que trabaje en la estacion origen}
 
 %\oclInv{Incorporación\_bicicletas}{(self.bicicletas $\rightarrow$ size()) < \ self.estacionDestino.capacidad}{La estación destino debe tener suficiente capacidad como para albergar la cantidad de bicicletas a incorporar}
 
