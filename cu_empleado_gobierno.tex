@@ -2,7 +2,7 @@
 
 ~
 
-\cu{Ingresando nueva estación}{Empleado de gobierno}{}
+\cu{Ingresando nueva estación}{Empleado de gobierno}{}{12}
 
 \begin{center}
     \centering
@@ -22,7 +22,7 @@
 
 ~
 
-\cu{Consultando estadísticas}{Empleado de gobierno}{}
+\cu{Consultando estadísticas}{Empleado de gobierno}{}{13}
 
 \begin{center}
     \centering
@@ -40,7 +40,7 @@
 
 ~
 
-\cu{Consultando sugerencias}{Empleado de gobierno}{}
+\cu{Consultando sugerencias}{Empleado de gobierno}{}{14}
 
 \begin{center}
     \centering
@@ -60,7 +60,7 @@
 
 ~
 
-\cu{Actualizando estado de la empresa de transportes}{Empleado de gobierno}{}
+\cu{Actualizando estado de la empresa de transportes}{Empleado de gobierno}{}{15}
 
 \begin{center}
     \centering
@@ -82,7 +82,7 @@ de bicicletas durante dicho horario.
 
 ~
 
-\cu{Ingresando nuevas bicicletas}{Empleado de gobierno}{}
+\cu{Ingresando nuevas bicicletas}{Empleado de gobierno}{}{16}
 
 \begin{center}
     \centering
@@ -105,7 +105,7 @@ en las distintas estaciones según lo calculado.
 
 ~
 
-\cu{Validando registro}{Empleado de gobierno}{}
+\cu{Validando registro}{Empleado de gobierno}{}{17}
 
 \begin{center}
     \centering
@@ -128,6 +128,59 @@ En caso de encontrar alguna anomalía invalida al registro y el sistema envía u
 al usuario informándole que la validación ha sido completada con éxito.
 
 ~
+
+\cu{Ingresando nuevo empleado}{Empleado de gobierno}{}{18}
+
+\begin{center}
+    \centering
+    \begin{tabular}{ | p{11cm} | p{6cm} | }
+        \multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
+        \multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\ \hline
+        1- El empleado de gobierno indica al sistema que desea ingresar un nuevo empleado & \\ \hline
+        2- El sistema despliega una interfaz en donde permite seleccionar la estación en donde desea incorporarlo & \\ \hline
+        3- El empleado selecciona alguna de las estaciones & \\ \hline
+        4- El sistema despliega una interfaz para ingresar los datos del empleado (Nombre, apellido, DNI, rango horario) & \\ \hline
+        5- El empleado completa el formulario & 5.1- El sistema detecta errores en la información suministrada. Por ejemplo: empleado ya registrado en alguna estación. Volver al paso 5. \\ \hline
+        6- El sistema informa al empleado de gobierno que el ingreso se completó exitosamente & \\ \hline
+        \underline{Postcondición :} Ingreso de empleado completo & \\ \hline
+    \end{tabular}
+\end{center}
+
+~
+
+\cu{Dando de baja empleado}{Empleado de gobierno}{}{19}
+
+\begin{center}
+    \centering
+    \begin{tabular}{ | p{11cm} | p{6cm} | }
+        \multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
+        \multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\ \hline
+        1- El empleado de gobierno indica al sistema que desea dar de baja a un empleado & \\ \hline
+        2- El sistema despliega una interfaz en donde permite seleccionar la estación de la cual se desea remover al empleado& \\ \hline
+        3- El empleado selecciona alguna de las estaciones & \\ \hline
+        4- El sistema despliega una lista de los empleados de dicha estación & \\ \hline
+        5- El empleado selecciona a uno de los empleados que muestra la interfaz \\ \hline
+        6- El sistema informa al empleado de gobierno que se removió al empleado exitosamente & \\ \hline
+        \underline{Postcondición :} Baja de empleado completa & \\ \hline
+    \end{tabular}
+\end{center}
+
+~
+
+\cu{Dando de baja estación}{Empleado de gobierno}{}{20}
+
+\begin{center}
+    \centering
+    \begin{tabular}{ | p{11cm} | p{6cm} | }
+        \multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
+        \multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\ \hline
+        1- El empleado de gobierno indica al sistema que desea dar de baja una estación & \\ \hline
+        2- El sistema despliega una interfaz en donde permite seleccionar la estación a remover& \\ \hline
+        3- El empleado selecciona alguna de las estaciones & \\ \hline
+        4- El sistema informa al empleado de gobierno que se removió la estación exitosamente & \\ \hline
+        \underline{Postcondición :} Baja de estación completa & \\ \hline
+    \end{tabular}
+\end{center}
 
 
 
