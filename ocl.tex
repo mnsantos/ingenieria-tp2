@@ -62,10 +62,13 @@ razonable)}
 
 ~
 
-\oclInv{Pedido}{((self.EstacionDestino.empleados $\rightarrow$ select(e | e.id = self.responsabilidadDe.id)) $\rightarrow$ size()) = \ 1}{Los pedidos tienen que tener como responsable a un empleado que trabaje en la estacion destino}
+\oclInv{Pedido}{((self.EstacionDestino.empleados $\rightarrow$ select(e | e.id = self.responsabilidadDestino.id)) $\rightarrow$ size()) = \ 1}{Los pedidos tienen que tener como responsable destino a un empleado que trabaje en la estacion destino}
 ~
 
-\oclInv{Incorporación\_bicicletas}{(self.bicicletas $\rightarrow$ size()) < \ self.estacionDestino.capacidad}{La estación destino debe tener suficiente capacidad como para albergar la cantidad de bicicletas a incorporar}
+
+\oclInv{Pedido}{((self.EstacionOrigen.empleados $\rightarrow$ select(e | e.id = self.responsabilidadOrigen.id)) $\rightarrow$ size()) = \ 1}{Los pedidos tienen que tener como responsable origen a un empleado que trabaje en la estacion origen}
+
+%\oclInv{Incorporación\_bicicletas}{(self.bicicletas $\rightarrow$ size()) < \ self.estacionDestino.capacidad}{La estación destino debe tener suficiente capacidad como para albergar la cantidad de bicicletas a incorporar}
 
 ~
 
@@ -93,8 +96,13 @@ razonable)}
 %\item La capacidad nunca es superada por la cantidad de bicicletas presentes (listo)
 %\end{itemize}
 
+\subsection{Algunas aclaraciones sobre las relaciones}
 
-
+\begin{itemize}
+	\item Planteamos la relación 'emitidoPor' entre las clases Alquiler y Empleado de estación para tener en claro quién es el responsable por cada alquiler que se realiza en las distintas estaciones y de esta forma evitar posibles irregularidades en el servicio.
+	\item Por el mismo motivo, planteamos las relaciones 'responsabilidad origen' y 'responsabilidad destino' entre las clases Pedido y Empleado de estación. Cuando el sistema emite un pedido de movilización de bicicletas, un empleado de la estación destino se encarga de modificar el stock de dicha estación en base al pedido realizado. Lo mismo sucede en la estación origen.
+	\item Planteamos la relación 'emitidoPor' entre las clases Empleado de gobierno e Incorporacion\_bicicletas puesto que queremos evitar posibles errores en la cantidad de bicicletas ingresadas, teniendo así un responsable para cuestionar y sancionar severamente. Al momento de incorporar nuevas bicicletas, el sistema las distribuye según las necesidades actuales de la Red de Ciclovías. 
+\end{itemize}
 
 
 
