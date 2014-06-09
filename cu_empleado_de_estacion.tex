@@ -1,5 +1,14 @@
 \subsection{Empleado de estación}
 
+Para las acciones en donde interactúan el empleado de estación y el usuario (principalmente a la hora de retirar una bicicleta
+y luego devolverla)
+es estrictamente necesario que se haya completado
+el proceso de registración para este último (es decir, que se hayan sometido los datos a un proceso de validación por parte
+del empleado de gobierno). Esto es consistente respecto a nuestros requerimientos ya que contribuye a la seguridad
+del sistema de la red de ciclovías.
+
+~
+
 \cu{Validando autenticación}{Empleado de estación}{}
 \begin{center}
     \centering
@@ -79,7 +88,8 @@ El tiempo que el usuario dure penalizado es calculado por el sistema a partir de
 		\hline
 		1- El empleado de estación indica al sistema que desea modificar el stock de estación. & \\ \hline
 		2- El sistema despliega un formulario para ingresar por separado los listados de IDs de las bicicletas que se van a agregar o remover de la estación. & \\ \hline
-		3- El empleado de estación ingresa en el formulario los IDs de las bicicletas que se agregan o remueven de la estación en los campos correspondientes y envía el formulario al sistema. & 
+		3- El empleado de estación ingresa en el formulario los IDs de las bicicletas que se agregan o remueven de la estación en los campos correspondientes y envía el formulario al sistema, e indica que él es el responsable de la
+		transacción en dicha estación & 
 		3.1- El sistema detecta inconsistencia en el listado de Id's ingresado por lo que el empleado de la estación vuelve a ingresar los datos. Volver al paso 3.\\ \hline
 		4- El sistema indica el stock fue modificado correctamente. & \\ \hline
 		\underline{Postcondición :} Stock de estación modificado & \\ \hline
@@ -87,6 +97,12 @@ El tiempo que el usuario dure penalizado es calculado por el sistema a partir de
 \end{center}	
 
 El empleado de estación modifica el stock cuando la empresa de transportes ingresa o retira bicicletas de su estación.
+Cuando se movilizan bicicletas, se modifica el stock en 2 estaciones: origen y destino (ver diagrama de clases). Para ambas
+debe haber un responsable de la transacción. I.E.: Si se movilizan 20 bicicletas de la estación A a la B, el empleado de 
+la estación A que modifica el stock debería hacerse responsable de corroborar que 20 y solo 20 bicicletas
+(cuyos id's coincidan con los del pedido) sean retiradas, y el empleado de la estación B que reciba las bicicletas debería
+corroborar que sean esas mismas 20 bicicletas las que llegan. Esto contribuye al correcto funcionamiento del sistema, y a la 
+posibilidad de asignar responsabilidades a las distintas partes del proceso de traslado (en donde participan distintos agentes).
 
 ~
 

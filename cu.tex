@@ -11,8 +11,8 @@
     	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\
 		\hline
 		1- El sistema despliega una interfaz gráfica con campos a completar
-		por el usuario: Nombre completo, Número de DNI, Domicilio, Mail y un teléfono
-		para contacto en caso de ser necesario &  \\ \hline
+		por el usuario: Nombre completo, Número de DNI, Domicilio, Mail, teléfono
+		de contacto y una contrase\~na para poder loguearse & \\ \hline
 		2 - El usuario ingresa los datos en el sistema & 2.1 - El usuario ya se encuentra ingresado en el sistema
 		o hay una inconsistencia con los datos de otro usuario almacenado en la base de datos. Fin de C.U \\ \hline
 		3 - El sistema registra al usuario en el sistema, almacena los datos en la base de datos y le anuncia al usuario que la registración se completará cuando los datos se validen y que se le comunicará de dicha operación via email.& \\ \hline
@@ -31,15 +31,18 @@ Una vez que el registro es realizado, los datos quedan sujetos a verificación p
     	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso normal}} & 
     	\multicolumn{1}{c}{\cellcolor{black!30}\textbf{Curso alternativo}} \\
 		\hline
-		1- El sistema despliega una interfaz gráfica con campos a completar
-		por el usuario: Nombre completo, Número de DNI, Domicilio, Mail y un teléfono
-		para contacto en caso de ser necesario &  \\ \hline
-		2 - El usuario ingresa los datos en el sistema & 2.1 - El usuario ya se encuentra ingresado en el sistema
-		o hay una inconsistencia con los datos de otro usuario almacenado en la base de datos. Fin de C.U \\ \hline
-		3 - El sistema registra al usuario en el sistema y almacena los datos en la base de datos & \\ \hline
-		\underline{Postcondición :} Usuario registrado & \\ \hline
+		1- El sistema solicita al usuario que ingrese su número de DNI y su contrase\~na para poder loguearse
+		&  \\ \hline
+		2 - El usuario ingresa los datos requeridos & 2.1 - El sistema detecta una inconsistencia en los datos ingresados y
+		solicita que los ingrese nuevamente \\ \hline
+		3 - El sistema le informa al usuario que se ha logueado exitosamente & \\ \hline
+		\underline{Postcondición :} Usuario logueándose & \\ \hline
     \end{tabular}
 \end{center}
+
+Para que un usuario pueda loguearse es necesario que esté registrado. Sin embargo, esto no puede ser una precondición ya que
+eventualmente cualquier persona puede realizar el intento de loguearse. La contrase\~na que el usuario debe ingresar debe
+corresponderse con aquella elegida al momento de iniciar el trámite de registración.
 
 ~
 
@@ -65,6 +68,9 @@ Una vez que el registro es realizado, los datos quedan sujetos a verificación p
     \end{tabular}
 \end{center}	
 
+Para este caso de uso no es necesario que el usuario haya iniciado el trámite de registración ya que según los
+requerimientos cualquiera puede obtener esta información.
+
 ~
 
 \cu{Consultando propio estado}{Usuario}{Usuario logueado}
@@ -76,13 +82,17 @@ Una vez que el registro es realizado, los datos quedan sujetos a verificación p
 		\hline
 		1- El usuario le informa al sistema que desea consultar su estado & \\ \hline
 		2- El sistema le despliega una interfaz con varias opciones a consultar:
-		Si el usuario está penalizado actualmente, el historial de 
+		existencia de penalización actual, el historial de 
 		penalizaciones y el historial de alquileres. & \\ \hline
 		3- El usuario indica la opción que desea consultar & \\ \hline
 		4- El sistema le envía al usuario la información solicitada.
 		\underline{Postcondición :} Consulta individual realizada & \\ \hline
     \end{tabular}
 \end{center}
+
+Para este caso de uso es una precondición que el usuario esté logueado, ya que la información consultada es confidencial, por
+lo que es consistente respecto a los requerimientos de seguridad planteados en el diagrama de objetivos durante la primera 
+iteración (Evitar suplantación de identidad)
 
 ~
 

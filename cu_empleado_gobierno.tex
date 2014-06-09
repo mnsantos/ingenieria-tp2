@@ -98,6 +98,11 @@ de bicicletas durante dicho horario.
     \end{tabular}
 \end{center}
 
+El gobierno de Mar Chiquita destina una parte del presupuesto a la compra de nuevas bicicletas. Cuando esto sucede, las mismas
+deben ser ingresadas al sistema antes de que puedan ser utilizadas. Para ello se utilizan los números de serie de las bicicletas (aprovechando que son únicos) como identificadores. Luego de que estos pasos son realizados, el sistema
+realiza un pedido especial en donde solicita a la empresa de transporte que las nuevas bicicletas sean distribuídas
+en las distintas estaciones según lo calculado.
+
 ~
 
 \cu{Validando registro}{Empleado de gobierno}{}
@@ -121,6 +126,7 @@ de bicicletas durante dicho horario.
 Luego de que un usuario se registra los datos quedan sujetos a verificación por parte de un empleado de gobierno. El mismo chequea consistencia entre la documentación presentada.
 En caso de encontrar alguna anomalía invalida al registro y el sistema envía una notificación al usuario. En el caso de que la validación sea exitosa, el sistema le envía un mail
 al usuario informándole que la validación ha sido completada con éxito.
+
 ~
 
 
