@@ -71,6 +71,7 @@ razonable)}
 ~
 
 \oclInv{Pedido}{((self.EstacionDestino.empleados $\rightarrow$ select(e | e.id = self.responsabilidadDestino.id)) $\rightarrow$ size()) = \ 1}{Los pedidos tienen que tener como responsable destino a un empleado que trabaje en la estacion destino}
+
 ~
 
 
@@ -86,18 +87,37 @@ razonable)}
 
 %%CHEQUEAR
 
-\oclInv{Usuario}{self.penalizaciones $\rightarrow$ forAll(p | self.alquileres $\rightarrow$ forAll(a | a.fecha < \ p.fechaEmision $\lor$ a.fecha > \ p.fechaVencimiento))}{Ningún usuario puede tener un alquiler cuya fecha coincida con el plazo de alguna penalización}
+\oclInv{Usuario}{self.alquileres $\rightarrow$ forAll( a | self.alquileres $\rightarrow$ select( p | a.penalizacion $\rightarrow$ size() = 1) $\rightarrow$ forAll(p | a.fecha < \ p.penalizacion.fechaEmision $\lor$ a.fecha > \ p.penalizacion.fechaVencimiento))}{Ningún usuario puede tener un alquiler cuya fecha coincida con el plazo de alguna penalización}
 
-%%
 ~
 
-\oclInv{Estacion}{self.capacidad $\geq$ self.bicicletas $\rightarrow$ size()}{La capacidad de una estación nunca es superada por la cantidad de bicicletas presentes}
+\oclInv{Alquiler}{self.Penalizacion $\rightarrow$ forAll(p | (p.Causa = Desaparicion\_bicicleta) implies (self.bicicleta.estaEn $\rightarrow$ size() = 0 $\wedge$ self.bicicleta.pedido $\rightarrow$ size() = 0))}{Si una bicicleta desaparece no aparecerá en ningún pedido o alquiler futuro}
 
-%Faltan:
+~
 
-\oclInv{}{}{Si una bicicleta desaparece no aparecerá en ningún pedido o alquiler futuro}
-\oclInv{}{}{Los empleados que tienen responsabilidad sobre un pedido deben estar en sus puestos de trabajo al momento de ser asignado}
-\oclInv{}{}{Un usuario no puede tener alquileres solapados}
+\oclInv{Pedido}{self.responsabilidadOrigen.Hora Entrada $\leq$ self.HoraSalida $\wedge$ self.responsabilidadOrigen.Hora Salida > \ self.HoraSalida}{Los pedidos tienen que tener como responsable origen a un empleado que se encuentre en su puesto de trabajo en el momento en que llega la empresa de transporte}
+
+~
+
+\oclInv{Pedido}{self.responsabilidadDestino.Hora Entrada $\leq$ self.HoraLlegada $\wedge$ self.responsabilidadDestino.Hora Salida > self.HoraLlegada}{Los pedidos tienen que tener como responsable destino a un empleado que se encuentre en su puesto de trabajo en el momento en que llega la empresa de transporte}
+
+~
+
+\oclInv{Usuario}{self.alquileres $\rightarrow$ forAll(a1,a2 | (a1.fecha = a2.fecha) implies (a1.Hora < \ > a2.Hora)}{Un usuario no puede tener alquileres solapados}
+
+~
+
+\oclInv{Estacion}{self.capacidad $\geq$ self.bicicletas $\rightarrow$ size()}{La cantidad de bicicletas presentes en una estación no supera su capacidad}
+
+~
+\oclInv{Estacion}{self.Bicicletas Reservadas $\leq$ self.bicicletas $\rightarrow$ size()}{La cantidad de bicicletas reservadas en una estación es menor o igual a la cantidad de bicicletas presentes en la misma}
+
+~
+
+\oclInv{Orden de pedido}{self.Bicicletas Solicitadas = self.pedido.bicicletas $\rightarrow$ size()}{La cantidad de bicicletas solicitadas en Orden de Pedido coincide con el número de bicicletas solicitadas por el Pedido}
+
+
+
 
 
 
