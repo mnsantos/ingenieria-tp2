@@ -1,6 +1,6 @@
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.19]{imgs/diagrama_clases.png}
+	\includegraphics[scale=0.30]{imgs/diagrama_clases.jpg}
 	\caption{Diagrama de Clases}
 \end{figure}
 
@@ -50,8 +50,37 @@ capacidad para albergar la cantidad de bicicletas pedidas}
 
 ~
 
-\oclInv{Pedido}{( (self.bicicletas $\rightarrow$ forAll(b | ((b.alquiler $\rightarrow$ size() = 1) implies
-(b.alquiler.Hora $\neq$ self.HoraSalida))))) }{Solo se pueden transportar bicicletas que no estén alquiladas}
+\oclInv{Pedido}{self.Fecha = self.FechaEmisión}{Los pedidos se emiten en la misma fecha en la cual serán transportados}
+
+~
+
+Nota: Para disminuir la cantidad de tiempo en que las bicicletas están reservadas (sin poder ser alquiladas), la hora de 
+emisión de los pedidos y la hora en el que se llevan a cabo no pueden estar separadas por más de 3 unidades.
+\oclInv{Pedido}{self.HoraSalida - self.HoraEmisión $\leq$ 5}{Los pedidos se emiten en la misma fecha en la cual serán transportados}
+
+~
+
+Nota: Cuando un pedido de \emph{n} bicicletas es emitido, se reservan automáticamente \emph{n} bicicletas en la estación
+origen para ser transportadas hacia la estación destino que no podrán ser alquiladas hasta que llegue la empresa de
+transporte.
+
+\oclInv{Pedido}{(today.Fecha() = self.Fecha $\wedge$ today.Hora() $\leq$ self.HoraSalida $\wedge$ self.HoraSalida - today.Hora() <= 5) implies (self.Bicicletas $\rightarrow$ 
+forAll (b | b.estaEn $\rightarrow$ size() = 1 $\wedge$ b.estaEn = self.estacionOrigen) )}{Las bicicletas que están en un pedido
+no pueden estar alquiladas en el rango de tiempo de 5 horas antes de la hora de salida y deben estar en la estación de origen
+del pedido}
+%{ ( (self.bicicletas $\rightarrow$ forAll(b | ((b.alquiler $\rightarrow$ size() = 1) implies
+%(b.alquiler.Hora $\neq$ self.HoraSalida))))) }
+
+~
+
+\oclInv{Pedido}{(Today.Fecha() = self.Fecha() $\wedge$ self.HoraSalida $\leq$ today.Hora() < self.HoraLlegada) implies (self.bicicletas $\rightarrow$ forAll (b | b.estaEn $\rightarrow$ size() = 0 $\wedge$ b.alquileres $\rightarrow
+$ select ( a | a.Fecha = today.Fecha() $\wedge$ a.Hora $\leq$ today.Hora() $\leq$ a.Hora+1) $\rightarrow$ size() = 0))}{Mientras las bicicletas están siendo transportadas no pueden ser alquiladas, y no están en ninguna estación}
+
+~
+
+\oclInv{Pedido}{(today.Fecha() = self.Fecha $\wedge$ today.Hora() = self.HoraLlegada) implies (self.Bicicletas $\rightarrow$ 
+forAll (b | b.estaEn $\rightarrow$ size() = 1 $\wedge$ b.estaEn = self.estacionDestino)}{Las bicicletas transportadas
+que han llegado recientemente a destino deben estar en la estación destino}
 
 ~
 
@@ -81,7 +110,7 @@ razonable)}
 
 ~
 
-\oclInv{Bicicleta}{Bicicleta.AllInstances() $\rightarrow$ forAll(b | (b.alquiler $\rightarrow$ size() = 1) implies (b.EstaEn $\rightarrow$ size() = 0)) }{Si una bicicleta está alquilada entonces no se encuentra en ninguna estación}
+\oclInv{Alquiler}{(self.Fecha = today.Fecha() $\wedge$ today.Hora() $\leq$ self.Hora + 1)  implies (self.bicicleta.EstaEn $\rightarrow$ size() = 0) }{Si una bicicleta está alquilada entonces no se encuentra en ninguna estación}
 
 ~
 
@@ -91,7 +120,10 @@ razonable)}
 
 ~
 
-\oclInv{Alquiler}{self.Penalizacion $\rightarrow$ forAll(p | (p.Causa = Desaparicion\_bicicleta) implies (self.bicicleta.estaEn $\rightarrow$ size() = 0 $\wedge$ self.bicicleta.pedido $\rightarrow$ size() = 0))}{Si una bicicleta desaparece no aparecerá en ningún pedido o alquiler futuro}
+\oclInv{Alquiler}{self.Penalizacion $\rightarrow$ forAll(p | (p.Causa = Desaparicion\_bicicleta) implies (self.bicicleta.estaEn $\rightarrow$ size() = 0 $\wedge$ (self.bicicleta.pedidos $\rightarrow$ forAll (q | not(q.FechaEmision > self.Fecha $\lor$ q.FechaEmision = self.Fecha $\wedge$ q.HoraEmision $\geq$
+self.Hora))) $\wedge$ (self.bicileta.alquileres $\rightarrow$ forAll (a | not(a.Fecha > self.Fecha $\lor$ a.Fecha = self.Fecha $\wedge$ a.Hora $\geq$
+self.Hora)))) )}{Si una bicicleta desaparece no aparecerá en ningún pedido o alquiler futuro}
+
 
 ~
 
@@ -103,7 +135,7 @@ razonable)}
 
 ~
 
-\oclInv{Usuario}{self.alquileres $\rightarrow$ forAll(a1,a2 | (a1.fecha = a2.fecha) implies (a1.Hora < \ > a2.Hora)}{Un usuario no puede tener alquileres solapados}
+\oclInv{Usuario}{self.alquileres $\rightarrow$ forAll(a1,a2 | (a1.fecha = a2.fecha) implies (a1.Hora < \ > a2.Hora) )}{Un usuario no puede tener alquileres solapados}
 
 ~
 
@@ -116,10 +148,33 @@ razonable)}
 
 \oclInv{Orden de pedido}{self.Bicicletas Solicitadas = self.pedido.bicicletas $\rightarrow$ size()}{La cantidad de bicicletas solicitadas en Orden de Pedido coincide con el número de bicicletas solicitadas por el Pedido}
 
+~
 
+\oclInv{Estadística}{self.cantidadAlquileres = self.perteneceA.alquileres $\rightarrow$ select( a | a.Fecha = self.Fecha) $\rightarrow$ size()}{Las estadísticas recolectan correctamente la cantidad de alquileres en una estación}
 
+~
 
+\oclInv{Estadística}{self.cantidadPedidosOrigen = self.perteneceA.pedidosOrigen $\rightarrow$ select( p | p.Fecha = self.Fecha) $\rightarrow$ size()}{Las estadísticas recolectan correctamente la cantidad de pedidos en los cuales se retiran bicicletas de la estación}
 
+~
+
+\oclInv{Estadística}{self.cantidadPedidosDestino = self.perteneceA.pedidosDestino $\rightarrow$ select( p | p.Fecha = self.Fecha) $\rightarrow$ size()}{Las estadísticas recolectan correctamente la cantidad de pedidos en los cuales ingresan bicicletas a la estación}
+
+~
+
+\oclInv{Estadística}{self.cantidadBicisOrigen = self.perteneceA.pedidosOrigen $\rightarrow$ select( p | p.Fecha = self.Fecha) $\rightarrow$ collect( b | b.biciletas $\rightarrow$ size() ) $\rightarrow$ sum()}{Las estadísticas recolectan correctamente la cantidad de bicicletas que se retiran de la estación para un pedido}
+
+~
+
+\oclInv{Estadística}{self.cantidadBicisDestino = self.perteneceA.pedidosDestino $\rightarrow$ select( p | p.Fecha = self.Fecha) $\rightarrow$ collect( b | b.biciletas $\rightarrow$ size() ) $\rightarrow$ sum()}{Las estadísticas recolectan correctamente la cantidad de bicicletas que ingresan en una estación para un pedido}
+
+~
+
+\oclInv{Pedido}{(self.horaSalida $\leq$ today.Hora() $\wedge$ today.Hora() $\leq$ self.horaLlegada) implies (self.estacionOrigen.bicicletas $\rightarrow$ size() $\geq$ self.bicicletas $\rightarrow$ size() )}{La cantidad de bicicletas solicitadas en un pedido no supera al stock de la estación origen}
+
+~
+
+\oclInv{Pedido}{(self.horaSalida $\leq$ today.Hora() $\wedge$ today.Hora() $\leq$ self.horaLlegada) implies (self.estacionDestino.Capacidad - self.estacionDestino.bicicletas $\rightarrow$ size() $\geq$ self.bicicletas $\rightarrow$ size() )}{La cantidad de bicicletas solicitadas en un pedido no supera la capacidad de la estación destino}
 
 %Otras para agregar:
 %\begin{itemize}
