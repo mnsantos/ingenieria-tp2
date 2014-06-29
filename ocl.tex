@@ -1,3 +1,20 @@
+\subsection{Algunas aclaraciones sobre las relaciones}
+
+\begin{itemize}
+	\item Planteamos la relación 'emitidoPor' entre las clases Alquiler y Empleado de estación para tener en claro quién es el responsable por cada alquiler que se realiza en las distintas estaciones y de esta forma evitar posibles irregularidades en el servicio.
+	\item Por el mismo motivo, planteamos las relaciones 'responsabilidad origen' y 'responsabilidad destino' entre las clases Pedido y Empleado de estación. Cuando el sistema emite un pedido de movilización de bicicletas, un empleado de la estación destino se encarga de modificar el stock de dicha estación en base al pedido realizado. Lo mismo sucede en la estación origen.
+	\item Planteamos la relación 'emitidoPor' entre las clases Empleado de gobierno e Incorporacion\_bicicletas puesto que queremos evitar posibles errores en la cantidad de bicicletas ingresadas, teniendo así un responsable para cuestionar y sancionar severamente. Al momento de incorporar nuevas bicicletas, el sistema las distribuye según las necesidades actuales de la Red de Ciclovías. 
+	\item Consideramos que disponemos de una clase ''today'' con dos atributos: Fecha y Hora, que representan la fecha
+	y hora actuales.
+	\item Agregamos la clase Orden de Pedido para agregarle un poco de formalidad al proceso de emisión de pedidos.
+	\item La relación estaEn - bicicletas entre la clase estación y la clase bicicleta representa el conjunto de 
+	bicicletas que actualmente se encuentran en dicha estación (no están siendo alquiladas ni transportadas en
+	la fecha y hora actual)
+	\item La clase Alquiler modela los alquileres históricos que han sido registrados por el sistema.
+	\item La clase Pedido modela los pedidos históricos que han sido registrados por el sistema.
+	\item Cada estación registra un conjunto de estadísticas diarias.
+\end{itemize}
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.30]{imgs/diagrama_clases.jpg}
@@ -55,14 +72,14 @@ capacidad para albergar la cantidad de bicicletas pedidas}
 ~
 
 Nota: Para disminuir la cantidad de tiempo en que las bicicletas están reservadas (sin poder ser alquiladas), la hora de 
-emisión de los pedidos y la hora en el que se llevan a cabo no pueden estar separadas por más de 3 unidades.
+emisión de los pedidos y la hora en el que se llevan a cabo no pueden estar separadas por más de 5 unidades.
 \oclInv{Pedido}{self.HoraSalida - self.HoraEmisión $\leq$ 5}{Los pedidos se emiten en la misma fecha en la cual serán transportados}
 
 ~
 
 Nota: Cuando un pedido de \emph{n} bicicletas es emitido, se reservan automáticamente \emph{n} bicicletas en la estación
-origen para ser transportadas hacia la estación destino que no podrán ser alquiladas hasta que llegue la empresa de
-transporte.
+origen para ser transportadas hacia la estación destino que no podrán ser alquiladas, ya que formarán parte del 
+envío.
 
 \oclInv{Pedido}{(today.Fecha() = self.Fecha $\wedge$ today.Hora() $\leq$ self.HoraSalida $\wedge$ self.HoraSalida - today.Hora() <= 5) implies (self.Bicicletas $\rightarrow$ 
 forAll (b | b.estaEn $\rightarrow$ size() = 1 $\wedge$ b.estaEn = self.estacionOrigen) )}{Las bicicletas que están en un pedido
@@ -116,7 +133,7 @@ razonable)}
 
 %%CHEQUEAR
 
-\oclInv{Usuario}{self.alquileres $\rightarrow$ forAll( a | self.alquileres $\rightarrow$ select( p | a.penalizacion $\rightarrow$ size() = 1) $\rightarrow$ forAll(p | a.fecha < \ p.penalizacion.fechaEmision $\lor$ a.fecha > \ p.penalizacion.fechaVencimiento))}{Ningún usuario puede tener un alquiler cuya fecha coincida con el plazo de alguna penalización}
+\oclInv{Usuario}{self.alquileres $\rightarrow$ forAll( a | self.alquileres $\rightarrow$ select( p | a.penalizacion $\rightarrow$ size() = 1) $\rightarrow$ forAll(p2 | a.fecha < \ p2.penalizacion.fechaEmision $\lor$ a.fecha > \ p2.penalizacion.fechaVencimiento))}{Ningún usuario puede tener un alquiler cuya fecha coincida con el plazo de alguna penalización}
 
 ~
 
@@ -124,10 +141,21 @@ razonable)}
 self.Hora))) $\wedge$ (self.bicileta.alquileres $\rightarrow$ forAll (a | not(a.Fecha > self.Fecha $\lor$ a.Fecha = self.Fecha $\wedge$ a.Hora $\geq$
 self.Hora)))) )}{Si una bicicleta desaparece no aparecerá en ningún pedido o alquiler futuro}
 
+~
+
+Nota: $\oplus$ representa el $\lor$ exclusivo (XOR).
+\oclInv{Bicicleta}{(self.alquileres $\rightarrow$ exists (a | a.Fecha = today.Fecha() $\wedge$ a.Hora $\leq$ today.Hora() $\leq$
+a.Hora()+1)) $\oplus$ (self.estaEn $\rightarrow$ size() = 1) $\oplus$ (self.pedidos.exists ( p | p.fechaEmision = today.Fecha() 
+$\wedge$ (p.horaSalida - 5 $\leq$ today.Hora() < p.horaSalida) $\lor$ (p.horaSalida $\leq$ today.Hora() < p.horaLlegada)
+)) $\oplus$ (self.alquileres.exists (a | (a.penalizacion $\rightarrow$ size() = 1) $\wedge$ a.penalizacion.Causa\_penalizacion
+= Rotura\_bicicleta $\lor$ 
+
+a.penalizacion.Causa\_penalizacion = Desaparicion\_bicicleta))}{Las bicicletas en todo momento están en alguna estación, siendo alquiladas, reservadas en algún
+pedido, siendo transportadas o previamente se han roto o han desaparecido}
 
 ~
 
-\oclInv{Pedido}{self.responsabilidadOrigen.Hora Entrada $\leq$ self.HoraSalida $\wedge$ self.responsabilidadOrigen.Hora Salida > \ self.HoraSalida}{Los pedidos tienen que tener como responsable origen a un empleado que se encuentre en su puesto de trabajo en el momento en que llega la empresa de transporte}
+\oclInv{Pedido}{self.responsabilidadOrigen.HoraEntrada $\leq$ self.HoraSalida $\wedge$ self.responsabilidadOrigen.Hora Salida > \ self.HoraSalida}{Los pedidos tienen que tener como responsable origen a un empleado que se encuentre en su puesto de trabajo en el momento en que llega la empresa de transporte}
 
 ~
 
@@ -142,39 +170,40 @@ self.Hora)))) )}{Si una bicicleta desaparece no aparecerá en ningún pedido o a
 \oclInv{Estacion}{self.capacidad $\geq$ self.bicicletas $\rightarrow$ size()}{La cantidad de bicicletas presentes en una estación no supera su capacidad}
 
 ~
-\oclInv{Estacion}{self.Bicicletas Reservadas $\leq$ self.bicicletas $\rightarrow$ size()}{La cantidad de bicicletas reservadas en una estación es menor o igual a la cantidad de bicicletas presentes en la misma}
+\oclInv{Estacion}{self.BicicletasReservadas $\leq$ self.bicicletas $\rightarrow$ size()}{La cantidad de bicicletas reservadas en una estación es menor o igual a la cantidad de bicicletas presentes en la misma}
 
 ~
 
-\oclInv{Orden de pedido}{self.Bicicletas Solicitadas = self.pedido.bicicletas $\rightarrow$ size()}{La cantidad de bicicletas solicitadas en Orden de Pedido coincide con el número de bicicletas solicitadas por el Pedido}
+\oclInv{Orden de pedido}{self.BicicletasSolicitadas = self.pedido.bicicletas $\rightarrow$ size()}{La cantidad de bicicletas solicitadas en Orden de Pedido coincide con el número de bicicletas solicitadas por el Pedido}
 
 ~
 
-\oclInv{Estadística}{self.cantidadAlquileres = self.perteneceA.alquileres $\rightarrow$ select( a | a.Fecha = self.Fecha) $\rightarrow$ size()}{Las estadísticas recolectan correctamente la cantidad de alquileres en una estación}
+\oclInv{Estadística}{self.cantidadAlquileres = self.perteneceA.alquileres $\rightarrow$ select( a | a.Fecha = self.Fecha) $\rightarrow$ size()}{Las estadísticas recolectan correctamente la cantidad de alquileres en una estación en una fecha
+determinada}
 
 ~
 
-\oclInv{Estadística}{self.cantidadPedidosOrigen = self.perteneceA.pedidosOrigen $\rightarrow$ select( p | p.Fecha = self.Fecha) $\rightarrow$ size()}{Las estadísticas recolectan correctamente la cantidad de pedidos en los cuales se retiran bicicletas de la estación}
+\oclInv{Estadística}{self.cantidadPedidosOrigen = self.perteneceA.pedidosOrigen $\rightarrow$ select( p | p.Fecha = self.Fecha) $\rightarrow$ size()}{Las estadísticas recolectan correctamente la cantidad de pedidos en los cuales se retiran bicicletas de la estación en una fecha determinada}
 
 ~
 
-\oclInv{Estadística}{self.cantidadPedidosDestino = self.perteneceA.pedidosDestino $\rightarrow$ select( p | p.Fecha = self.Fecha) $\rightarrow$ size()}{Las estadísticas recolectan correctamente la cantidad de pedidos en los cuales ingresan bicicletas a la estación}
+\oclInv{Estadística}{self.cantidadPedidosDestino = self.perteneceA.pedidosDestino $\rightarrow$ select( p | p.Fecha = self.Fecha) $\rightarrow$ size()}{Las estadísticas recolectan correctamente la cantidad de pedidos en los cuales ingresan bicicletas a la estación en una fecha determinada}
 
 ~
 
-\oclInv{Estadística}{self.cantidadBicisOrigen = self.perteneceA.pedidosOrigen $\rightarrow$ select( p | p.Fecha = self.Fecha) $\rightarrow$ collect( b | b.biciletas $\rightarrow$ size() ) $\rightarrow$ sum()}{Las estadísticas recolectan correctamente la cantidad de bicicletas que se retiran de la estación para un pedido}
+\oclInv{Estadística}{self.cantidadBicisOrigen = self.perteneceA.pedidosOrigen $\rightarrow$ select( p | p.Fecha = self.Fecha) $\rightarrow$ collect( b | b.biciletas $\rightarrow$ size() ) $\rightarrow$ sum()}{Las estadísticas recolectan correctamente la cantidad de bicicletas que se retiran de la estación para un pedido en una fecha determinada}
 
 ~
 
-\oclInv{Estadística}{self.cantidadBicisDestino = self.perteneceA.pedidosDestino $\rightarrow$ select( p | p.Fecha = self.Fecha) $\rightarrow$ collect( b | b.biciletas $\rightarrow$ size() ) $\rightarrow$ sum()}{Las estadísticas recolectan correctamente la cantidad de bicicletas que ingresan en una estación para un pedido}
+\oclInv{Estadística}{self.cantidadBicisDestino = self.perteneceA.pedidosDestino $\rightarrow$ select( p | p.Fecha = self.Fecha) $\rightarrow$ collect( b | b.biciletas $\rightarrow$ size() ) $\rightarrow$ sum()}{Las estadísticas recolectan correctamente la cantidad de bicicletas que ingresan en una estación para un pedido en una fecha determinada}
 
 ~
 
-\oclInv{Pedido}{(self.horaSalida $\leq$ today.Hora() $\wedge$ today.Hora() $\leq$ self.horaLlegada) implies (self.estacionOrigen.bicicletas $\rightarrow$ size() $\geq$ self.bicicletas $\rightarrow$ size() )}{La cantidad de bicicletas solicitadas en un pedido no supera al stock de la estación origen}
+\oclInv{Pedido}{(self.Fecha = today.Fecha() $\wedge$ self.horaSalida $\leq$ today.Hora() $\wedge$ today.Hora() $\leq$ self.horaLlegada) implies (self.estacionOrigen.bicicletas $\rightarrow$ size() $\geq$ self.bicicletas $\rightarrow$ size() )}{La cantidad de bicicletas solicitadas en un pedido no supera al stock de la estación origen}
 
 ~
 
-\oclInv{Pedido}{(self.horaSalida $\leq$ today.Hora() $\wedge$ today.Hora() $\leq$ self.horaLlegada) implies (self.estacionDestino.Capacidad - self.estacionDestino.bicicletas $\rightarrow$ size() $\geq$ self.bicicletas $\rightarrow$ size() )}{La cantidad de bicicletas solicitadas en un pedido no supera la capacidad de la estación destino}
+\oclInv{Pedido}{(self.Fecha = today.Fecha() $\wedge$ self.horaSalida $\leq$ today.Hora() $\wedge$ today.Hora() $\leq$ self.horaLlegada) implies (self.estacionDestino.Capacidad - self.estacionDestino.bicicletas $\rightarrow$ size() $\geq$ self.bicicletas $\rightarrow$ size() )}{La cantidad de bicicletas solicitadas en un pedido no supera la capacidad de la estación destino}
 
 %Otras para agregar:
 %\begin{itemize}
@@ -187,13 +216,6 @@ self.Hora)))) )}{Si una bicicleta desaparece no aparecerá en ningún pedido o a
 %\item La capacidad nunca es superada por la cantidad de bicicletas presentes (listo)
 %\end{itemize}
 
-\subsection{Algunas aclaraciones sobre las relaciones}
-
-\begin{itemize}
-	\item Planteamos la relación 'emitidoPor' entre las clases Alquiler y Empleado de estación para tener en claro quién es el responsable por cada alquiler que se realiza en las distintas estaciones y de esta forma evitar posibles irregularidades en el servicio.
-	\item Por el mismo motivo, planteamos las relaciones 'responsabilidad origen' y 'responsabilidad destino' entre las clases Pedido y Empleado de estación. Cuando el sistema emite un pedido de movilización de bicicletas, un empleado de la estación destino se encarga de modificar el stock de dicha estación en base al pedido realizado. Lo mismo sucede en la estación origen.
-	\item Planteamos la relación 'emitidoPor' entre las clases Empleado de gobierno e Incorporacion\_bicicletas puesto que queremos evitar posibles errores en la cantidad de bicicletas ingresadas, teniendo así un responsable para cuestionar y sancionar severamente. Al momento de incorporar nuevas bicicletas, el sistema las distribuye según las necesidades actuales de la Red de Ciclovías. 
-\end{itemize}
 
 
 
