@@ -158,7 +158,6 @@
       </data>
     </edge>
     <edge id="e5" source="n2" target="n1">
-      <data key="d9"/>
       <data key="d10">
         <y:ArcEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
@@ -166,14 +165,14 @@
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
-          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="412.796875" x="-331.3246612839499" y="84.62678505164627">emitir pedido a la estación i:[1..N]!
-[ stock[i] == 0 ]
+          <y:EdgeLabel alignment="center" configuration="AutoFlippingLabel" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="59.875" modelName="custom" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="412.796875" x="-322.28451196480296" y="80.10671047521782">emitir pedido a la estación i:[1..N]!
+[ stock[i] == 0 AND pedido[i] == 0 ]
 { pedido[i] = calcularPedido(i)[cantidad] }
 { pedido[calcularPedido(i)[origen]] = - calcularPedido(i)[cantidad] }<y:LabelModel>
               <y:SmartEdgeLabelModel autoRotationEnabled="false" defaultAngle="0.0" defaultDistance="10.0"/>
             </y:LabelModel>
             <y:ModelParameter>
-              <y:SmartEdgeLabelModelParameter angle="6.283185307179586" distance="57.354795574510476" distanceToCenter="true" position="left" ratio="25.5805066174218" segment="-2"/>
+              <y:SmartEdgeLabelModelParameter angle="6.283185307179586" distance="57.354795574510476" distanceToCenter="true" position="left" ratio="15.473312452424842" segment="-2"/>
             </y:ModelParameter>
             <y:PreferredPlacementDescriptor angle="0.0" angleOffsetOnRightSide="0" angleReference="absolute" angleRotationOnRightSide="co" distance="-1.0" frozen="true" placement="anywhere" side="anywhere" sideReference="relative_to_edge_flow"/>
           </y:EdgeLabel>
@@ -182,7 +181,6 @@
       </data>
     </edge>
     <edge id="e6" source="n2" target="n2">
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
